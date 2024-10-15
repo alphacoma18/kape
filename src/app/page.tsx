@@ -1,8 +1,7 @@
+import MenuPage from "./menu/page";
 
 const Home = () => {
-  return (
-    <h1>Home ni Rab</h1>
-  );
+  return <MenuPage />;
 }
 
 export default Home;

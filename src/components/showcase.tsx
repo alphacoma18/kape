@@ -1,17 +1,17 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useAnimationFrame } from 'framer-motion';
 import Image from 'next/image';
 
 const PartnerShowcase = () => {
-    const partners = [
+    const partners = useMemo(() => [
         "/placeholder.svg?height=100&width=100&text=Partner1",
         "/placeholder.svg?height=100&width=100&text=Partner2",
         "/placeholder.svg?height=100&width=100&text=Partner3",
         "/placeholder.svg?height=100&width=100&text=Partner4",
         "/placeholder.svg?height=100&width=100&text=Partner5",
         "/placeholder.svg?height=100&width=100&text=Partner6",
-    ];
+    ], []);
 
     const [loopWidth, setLoopWidth] = useState(0);
     const [xPosition, setXPosition] = useState(0);

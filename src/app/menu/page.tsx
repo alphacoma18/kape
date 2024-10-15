@@ -60,7 +60,7 @@ export default function MenuPage() {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [setIsCartOpen])
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -75,7 +75,7 @@ export default function MenuPage() {
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick)
     }
-  }, [isCartOpen])
+  },)
 
   const addToCart = (item: MenuItem) => {
     setCart((prevCart) => {

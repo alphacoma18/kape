@@ -4,22 +4,21 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
-import { CreditCard } from 'lucide-react';
+import { Check, CreditCard } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 // Import the CartItem type from the menu-page file
 import { useContext, useState } from 'react';
 import ContextGlobal from '@/utils/context/_global';
 
 export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('credit_card');
-  const router = useRouter();
+  const [orderPlaced, setOrderPlaced] = useState(false)
+  const [orderNumber, setOrderNumber] = useState('')
   
   // Get cart from context instead of search params
-  const { cart } = useContext(ContextGlobal);
+  const { clearCart, cart } = useContext(ContextGlobal);
 
   const getTotalPrice = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -27,19 +26,45 @@ export default function Checkout() {
 
   const processOrder = (event: React.FormEvent) => {
     event.preventDefault();
-    // Here you would typically send the order data to your backend
     console.log('Processing order for cart:', cart);
     toast.promise(
-      new Promise((resolve) => setTimeout(resolve, 2000)),
-      {
-        pending: 'Processing your order...',
-        success: 'Order placed successfully! Thank you for your purchase.',
-        error: 'An error occurred. Please try again.',
-      }
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+        {
+            pending: 'Processing your order...',
+            success: 'Order placed successfully! Thank you for your purchase.',
+            error: 'An error occurred. Please try again.',
+        }
     ).then(() => {
-      router.push('/');
+        const newOrderNumber = Math.floor(100000 + Math.random() * 900000).toString();
+        setOrderNumber(newOrderNumber);
+        setOrderPlaced(true);
+        clearCart(); // Clear the cart after placing the order
     });
-  };
+};
+
+  if (orderPlaced) {
+    return (
+      <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md text-center"
+        >
+          <Check className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
+          <p className="mb-4">Your order number is: <span className="font-bold">{orderNumber}</span></p>
+          <p className="mb-6">Thank you for your purchase. We&apos;ll email you when your order is ready.</p>
+          <Link href="/">
+            <Button className="w-full bg-[#776B5D] hover:bg-[#5D5448] text-white">
+              Return to Menu
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    )
+  }
+
 
   return (
     <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932] flex items-center justify-center p-4">

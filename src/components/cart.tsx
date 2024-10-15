@@ -51,7 +51,7 @@ const Cart = () => {
                                 <p className="font-bold text-lg">Total: ${getTotalPrice()}</p>
                                 <div className="flex gap-2 mt-4">
                                     <Link href={`/checkout?cart=${encodeURIComponent(JSON.stringify(cart))}`}>
-                                        <Button className="flex-1">Proceed to Checkout</Button>
+                                        <Button onClick={() => setIsCartOpen(false)} className="flex-1">Proceed to Checkout</Button>
                                     </Link>
                                     <Button onClick={clearCart} variant="outline" className="flex-1">
                                         <Trash2 className="h-4 w-4 mr-2" />
