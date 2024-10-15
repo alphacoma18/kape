@@ -6,31 +6,20 @@ import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
 import { CreditCard } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Import the CartItem type from the menu-page file
-import { CartItem } from '@/utils/context/_global';
+import { useContext, useState } from 'react';
+import ContextGlobal from '@/utils/context/_global';
 
 export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('credit_card');
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [cart, setCart] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    const cartParam = searchParams.get('cart');
-    if (cartParam) {
-      try {
-        const parsedCart = JSON.parse(decodeURIComponent(cartParam));
-        setCart(parsedCart);
-      } catch (error) {
-        console.error('Failed to parse cart data:', error);
-      }
-    }
-  }, [searchParams]);
+  
+  // Get cart from context instead of search params
+  const { cart } = useContext(ContextGlobal);
 
   const getTotalPrice = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);

@@ -7,7 +7,7 @@ import { Minus, Plus, Trash2, X } from 'lucide-react';
 import Link from 'next/link';
 const Cart = () => {
     const { cart, isCartOpen, setIsCartOpen, updateCartItemQuantity, clearCart } = useContext(ContextGlobal);
-    const getTotalPrice = () => cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    const getTotalPrice = () => cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 
     return (
         <AnimatePresence>

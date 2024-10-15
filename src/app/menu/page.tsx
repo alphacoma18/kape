@@ -2,16 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Coffee, Croissant, Grid, IceCream, Leaf, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
-import Link from 'next/link';
+import { ChevronLeft, ChevronRight, Coffee, Croissant, Grid, IceCream, Leaf} from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { MenuItem, CartItem } from '@/utils/context/_global';
+import { MenuItem } from '@/utils/context/_global';
 
 const menuItems: MenuItem[] = [
   { id: 1, name: 'Caffe Latte', description: 'Rich espresso with steamed milk', price: 3.95, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Caffe_Latte_at_Pulse_Cafe.jpg/1280px-Caffe_Latte_at_Pulse_Cafe.jpg', category: 'Hot Coffees' },
@@ -47,7 +45,7 @@ const categoryIcons = {
 import GlobalContext from '@/utils/context/_global';
 import { useContext } from 'react';
 export default function MenuPage() {
-  const { cart, setCart, isCartOpen, setIsCartOpen } = useContext(GlobalContext);
+  const { setCart, isCartOpen, setIsCartOpen } = useContext(GlobalContext);
   const [activeCategory, setActiveCategory] = useState('All Items')
   const [isMobile, setIsMobile] = useState(false)
 
@@ -91,16 +89,6 @@ export default function MenuPage() {
     })
     toast.success(`Added ${item.name} to cart`)
 
-  }
-
-
-  const clearCart = () => {
-    setCart([])
-    toast.info('Cart cleared')
-  }
-
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)
   }
 
   const sliderSettings = {
