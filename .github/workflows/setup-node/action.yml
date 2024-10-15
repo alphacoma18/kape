@@ -1,0 +1,23 @@
+# File: .github/workflows/setup-node/action.yml
+description: "Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧"
+name: setup-node
+runs:
+  steps:
+    - name: Setup Node.js ⚙️
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - id: cache_dependencies
+      name: Cache dependencies ⚡
+      uses: actions/cache@v3
+      with:
+        key: node-modules-${{ hashFiles('package-lock.json') }}
+        path: node_modules
+
+    - id: install_dependencies
+      if: steps.cache_dependencies.outputs.cache-hit != 'true'
+      name: Install dependencies 🔧
+      run: pnpm ci
+      shell: bash
+  using: "composite"
