@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { CreditCard } from 'lucide-react'
+import { CreditCard, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -16,6 +16,8 @@ import { CartItem } from '../menu/page'
 
 export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('credit_card')
+  const [orderPlaced, setOrderPlaced] = useState(false)
+  const [orderNumber, setOrderNumber] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
   const [cart, setCart] = useState<CartItem[]>([])
@@ -48,8 +50,34 @@ export default function Checkout() {
         error: 'An error occurred. Please try again.',
       }
     ).then(() => {
-      router.push('/')
+      // Generate a random order number
+      const newOrderNumber = Math.floor(100000 + Math.random() * 900000).toString()
+      setOrderNumber(newOrderNumber)
+      setOrderPlaced(true)
     })
+  }
+
+  if (orderPlaced) {
+    return (
+      <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932] flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md text-center"
+        >
+          <Check className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
+          <p className="mb-4">Your order number is: <span className="font-bold">{orderNumber}</span></p>
+          <p className="mb-6">Thank you for your purchase. We'll email you when your order is ready.</p>
+          <Link href="/">
+            <Button className="w-full bg-[#776B5D] hover:bg-[#5D5448] text-white">
+              Return to Menu
+            </Button>
+          </Link>
+        </motion.div>
+      </div>
+    )
   }
 
   return (
