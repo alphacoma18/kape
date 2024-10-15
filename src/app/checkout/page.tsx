@@ -95,7 +95,7 @@ export default function Checkout() {
                   }`}
                   onClick={() => setPaymentMethod('gcash')}
                 >
-                  <img src="/placeholder.svg?height=20&width=20" alt="GCash" className="h-5 w-5" />
+                  <img src="/Gcash_logo.svg?height=20&width=20" alt="GCash" className="h-5 w-5" />
                   <span>GCash</span>
                 </Button>
                 <Button
@@ -106,7 +106,7 @@ export default function Checkout() {
                   }`}
                   onClick={() => setPaymentMethod('maya')}
                 >
-                  <img src="/placeholder.svg?height=20&width=20" alt="Maya" className="h-5 w-5" />
+                  <img src="/Maya_logo.svg?height=20&width=20" alt="Maya" className="h-5 w-5" />
                   <span>Maya</span>
                 </Button>
               </div>
