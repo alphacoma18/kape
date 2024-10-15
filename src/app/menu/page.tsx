@@ -11,17 +11,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-
-type MenuItem = {
-  id: number
-  name: string
-  description: string
-  price: number
-  image: string
-  category: string
-}
-
-export type CartItem = MenuItem & { quantity: number }
+import { MenuItem, CartItem } from '@/utils/context/_global';
 
 const menuItems: MenuItem[] = [
   { id: 1, name: 'Caffe Latte', description: 'Rich espresso with steamed milk', price: 3.95, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Caffe_Latte_at_Pulse_Cafe.jpg/1280px-Caffe_Latte_at_Pulse_Cafe.jpg', category: 'Hot Coffees' },
@@ -54,10 +44,10 @@ const categoryIcons = {
   'Tea': Leaf,
   'Food': Croissant,
 }
-
+import GlobalContext from '@/utils/context/_global';
+import { useContext } from 'react';
 export default function MenuPage() {
-  const [cart, setCart] = useState<CartItem[]>([])
-  const [isCartOpen, setIsCartOpen] = useState(false)
+  const { cart, setCart, isCartOpen, setIsCartOpen } = useContext(GlobalContext);
   const [activeCategory, setActiveCategory] = useState('All Items')
   const [isMobile, setIsMobile] = useState(false)
 
@@ -100,19 +90,9 @@ export default function MenuPage() {
       return [...prevCart, { ...item, quantity: 1 }]
     })
     toast.success(`Added ${item.name} to cart`)
+
   }
 
-  const updateCartItemQuantity = (id: number, delta: number) => {
-    setCart((prevCart) =>
-      prevCart.reduce((acc, item) => {
-        if (item.id === id) {
-          const newQuantity = item.quantity + delta
-          return newQuantity > 0 ? [...acc, { ...item, quantity: newQuantity }] : acc
-        }
-        return [...acc, item]
-      }, [] as CartItem[])
-    )
-  }
 
   const clearCart = () => {
     setCart([])
@@ -135,18 +115,6 @@ export default function MenuPage() {
 
   return (
     <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932]">
-      <header className="bg-[#776B5D] text-white p-4 flex justify-between items-center sticky top-0 z-20">
-        <h1 className="text-2xl font-bold">Kape ni Rab</h1>
-        <Button id="cart-button" variant="ghost" size="icon" onClick={() => setIsCartOpen(!isCartOpen)}>
-          <ShoppingBag className="h-6 w-6" />
-          {cart.length > 0 && (
-            <span className="absolute top-0 right-0 bg-[#C41E3A] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-              {cart.reduce((total, item) => total + item.quantity, 0)}
-            </span>
-          )}
-        </Button>
-      </header>
-
       <nav className="bg-[#776B5D] text-white p-2 sticky top-[60px] z-10">
         {isMobile ? (
           <Slider {...sliderSettings} className="mx-8">
@@ -212,61 +180,6 @@ export default function MenuPage() {
             ))}
         </div>
       </main>
-
-      <AnimatePresence>
-        {isCartOpen && (
-          <motion.div
-            id="cart-sidebar"
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween' }}
-            className="fixed top-0 right-0 h-full w-full sm:w-80 bg-white p-4 shadow-lg overflow-y-auto z-30"
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Your Order</h2>
-              <Button variant="ghost" size="icon" onClick={() => setIsCartOpen(false)}>
-                <X className="h-6 w-6" />
-              </Button>
-            </div>
-            {cart.length === 0 ? (
-              <p>Your order is empty</p>
-            ) : (
-              <>
-                {cart.map((item) => (
-                  <div key={item.id} className="flex justify-between items-center mb-4 border-b pb-2">
-                    <div>
-                      <p className="font-semibold">{item.name}</p>
-                      <p className="text-sm text-gray-600">${item.price.toFixed(2)} each</p>
-                    </div>
-                    <div className="flex items-center">
-                      <Button variant="outline" size="icon" onClick={() => updateCartItemQuantity(item.id, -1)}>
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <span className="mx-2">{item.quantity}</span>
-                      <Button variant="outline" size="icon" onClick={() => updateCartItemQuantity(item.id, 1)}>
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-                <div className="mt-4">
-                  <p className="font-bold text-lg">Total: ${getTotalPrice()}</p>
-                  <div className="flex gap-2 mt-4">
-                    <Link href={`/checkout?cart=${encodeURIComponent(JSON.stringify(cart))}`}>
-                      <Button className="flex-1">Proceed to Checkout</Button>
-                    </Link>
-                    <Button onClick={clearCart} variant="outline" className="flex-1">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Clear Cart
-                    </Button>
-                  </div>
-                </div>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <ToastContainer position="bottom-right" autoClose={3000} />
     </div>

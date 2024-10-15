@@ -1,47 +1,45 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { CreditCard, Check } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { motion } from 'framer-motion';
+import { CreditCard } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import the CartItem type from the menu-page file
-import { CartItem } from '../menu/page'
+import { CartItem } from '@/utils/context/_global';
 
 export default function Checkout() {
-  const [paymentMethod, setPaymentMethod] = useState('credit_card')
-  const [orderPlaced, setOrderPlaced] = useState(false)
-  const [orderNumber, setOrderNumber] = useState('')
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [cart, setCart] = useState<CartItem[]>([])
+  const [paymentMethod, setPaymentMethod] = useState('credit_card');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    const cartParam = searchParams.get('cart')
+    const cartParam = searchParams.get('cart');
     if (cartParam) {
       try {
-        const parsedCart = JSON.parse(decodeURIComponent(cartParam))
-        setCart(parsedCart)
+        const parsedCart = JSON.parse(decodeURIComponent(cartParam));
+        setCart(parsedCart);
       } catch (error) {
-        console.error('Failed to parse cart data:', error)
+        console.error('Failed to parse cart data:', error);
       }
     }
-  }, [searchParams])
+  }, [searchParams]);
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)
-  }
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  };
 
   const processOrder = (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     // Here you would typically send the order data to your backend
-    console.log('Processing order for cart:', cart)
+    console.log('Processing order for cart:', cart);
     toast.promise(
       new Promise((resolve) => setTimeout(resolve, 2000)),
       {
@@ -50,35 +48,9 @@ export default function Checkout() {
         error: 'An error occurred. Please try again.',
       }
     ).then(() => {
-      // Generate a random order number
-      const newOrderNumber = Math.floor(100000 + Math.random() * 900000).toString()
-      setOrderNumber(newOrderNumber)
-      setOrderPlaced(true)
-    })
-  }
-
-  if (orderPlaced) {
-    return (
-      <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932] flex items-center justify-center p-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md text-center"
-        >
-          <Check className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
-          <p className="mb-4">Your order number is: <span className="font-bold">{orderNumber}</span></p>
-          <p className="mb-6">Thank you for your purchase. We'll email you when your order is ready.</p>
-          <Link href="/">
-            <Button className="w-full bg-[#776B5D] hover:bg-[#5D5448] text-white">
-              Return to Menu
-            </Button>
-          </Link>
-        </motion.div>
-      </div>
-    )
-  }
+      router.push('/');
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932] flex items-center justify-center p-4">
@@ -107,9 +79,8 @@ export default function Checkout() {
                 <Button
                   type="button"
                   variant={paymentMethod === 'credit_card' ? 'default' : 'outline'}
-                  className={`flex-1 items-center justify-center space-x-2 p-4 ${
-                    paymentMethod === 'credit_card' ? 'bg-[#776B5D] text-white' : ''
-                  }`}
+                  className={`flex-1 items-center justify-center space-x-2 p-4 ${paymentMethod === 'credit_card' ? 'bg-[#776B5D] text-white' : ''
+                    }`}
                   onClick={() => setPaymentMethod('credit_card')}
                 >
                   <CreditCard className="h-5 w-5" />
@@ -118,9 +89,8 @@ export default function Checkout() {
                 <Button
                   type="button"
                   variant={paymentMethod === 'gcash' ? 'default' : 'outline'}
-                  className={`flex-1 items-center justify-center space-x-2 p-4 ${
-                    paymentMethod === 'gcash' ? 'bg-[#776B5D] text-white' : ''
-                  }`}
+                  className={`flex-1 items-center justify-center space-x-2 p-4 ${paymentMethod === 'gcash' ? 'bg-[#776B5D] text-white' : ''
+                    }`}
                   onClick={() => setPaymentMethod('gcash')}
                 >
                   <img src="/Gcash_logo.svg?height=20&width=20" alt="GCash" className="h-5 w-5" />
@@ -129,9 +99,8 @@ export default function Checkout() {
                 <Button
                   type="button"
                   variant={paymentMethod === 'maya' ? 'default' : 'outline'}
-                  className={`flex-1 items-center justify-center space-x-2 p-4 ${
-                    paymentMethod === 'maya' ? 'bg-[#776B5D] text-white' : ''
-                  }`}
+                  className={`flex-1 items-center justify-center space-x-2 p-4 ${paymentMethod === 'maya' ? 'bg-[#776B5D] text-white' : ''
+                    }`}
                   onClick={() => setPaymentMethod('maya')}
                 >
                   <img src="/Maya_logo.svg?height=20&width=20" alt="Maya" className="h-5 w-5" />
@@ -184,5 +153,5 @@ export default function Checkout() {
       </motion.div>
       <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
-  )
+  );
 }
