@@ -1,32 +1,33 @@
 "use client";
 
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { Coffee, Github, Linkedin, Mail, Phone, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import PartnerShowcase from '@/components/showcase';
+
 export default function AboutUs() {
     const [activeTab, setActiveTab] = useState('mission');
     const [activeCommitment, setActiveCommitment] = useState(0);
 
     const controls = useAnimation();
-    const [width, setWidth] = useState(0);
+    //const [width, setWidth] = useState(0);
 
-    const partners = [
+    const partners = useMemo(() => [
         "/placeholder.svg?height=100&width=100&text=Partner1",
         "/placeholder.svg?height=100&width=100&text=Partner2",
         "/placeholder.svg?height=100&width=100&text=Partner3",
         "/placeholder.svg?height=100&width=100&text=Partner4",
         "/placeholder.svg?height=100&width=100&text=Partner5",
         "/placeholder.svg?height=100&width=100&text=Partner6",
-    ];
+    ], []);
 
     useEffect(() => {
         // Calculate total width of all partner logos
         const totalWidth = partners.length * (100 + 32); // 100px width + 32px margin
-        setWidth(totalWidth);
+        //setWidth(totalWidth); // Set width state
 
         // Start the animation
         controls.start({
@@ -337,7 +338,7 @@ export default function AboutUs() {
                                     className="bg-[#E1D4C0] rounded-lg p-4 mb-4"
                                     whileHover={{ scale: 1.03 }}
                                 >
-                                    <blockquote className="italic text-lg mb-2">"{testimonial.text}"</blockquote>
+                                    <blockquote className="italic text-lg mb-2">&quot;{testimonial.text}&quot;</blockquote>
                                     <p className="text-right">- {testimonial.name}</p>
                                 </motion.div>
                             ))}
@@ -353,7 +354,7 @@ export default function AboutUs() {
                                     className="bg-[#E1D4C0] rounded-lg p-4 mb-4"
                                     whileHover={{ scale: 1.03 }}
                                 >
-                                    <p className="text-lg mb-2">"{press.text}"</p>
+                                    <p className="text-lg mb-2">&quot;{press.text}&quot;</p>
                                     <p className="text-right">- {press.source}</p>
                                 </motion.div>
                             ))}

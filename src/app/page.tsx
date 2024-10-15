@@ -1,7 +1,7 @@
-import MenuPage from "./menu/page";
+import AboutUs from "./about-us/page";
 
 const Home = () => {
-  return <MenuPage />;
+  return <AboutUs />;
 }
 
 export default Home;

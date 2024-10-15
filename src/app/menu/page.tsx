@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import { MenuItem } from '@/utils/context/_global';
+import Image from 'next/image';
 
 const menuItems: MenuItem[] = [
   { id: 1, name: 'Caffe Latte', description: 'Rich espresso with steamed milk', price: 3.95, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Caffe_Latte_at_Pulse_Cafe.jpg/1280px-Caffe_Latte_at_Pulse_Cafe.jpg', category: 'Hot Coffees' },
@@ -145,7 +146,13 @@ export default function MenuPage() {
             .map((item) => (
               <Card key={item.id} className="bg-white border-[#776B5D] border-opacity-20">
                 <CardHeader>
-                  <img src={item.image} alt={item.name} className="w-full h-48 object-cover rounded-t-lg" />
+                <Image
+                  src={item.image} // Use dynamic source
+                  alt={item.name} // Use dynamic alt text
+                  width={500} // Specify a width (adjust based on your layout)
+                  height={192} // Specify a height (adjust based on your layout)
+                  className="w-full h-48 object-cover rounded-t-lg" // Use className for styling
+                />
                 </CardHeader>
                 <CardContent>
                   <CardTitle className="text-lg">{item.name}</CardTitle>

@@ -294,7 +294,7 @@ export default function AboutUs() {
                             <h3 className="text-xl font-semibold mb-4">Customer Testimonials</h3>
                             <div className="border-l-4 border-[#E1D4C0] pl-4 mb-4">
                                 <blockquote className="italic text-lg mb-2">
-                                    "Kape ni Rab isn't just about great coffee; it's about the warm community they've built. It's my second home!"
+                                    &quot;Kape ni Rab isn&apos;t just about great coffee; it&apos;s about the warm community they&apos;ve built. It&apos;s my second home!&quot;
                                 </blockquote>
                                 <p className="text-right">- Maria S., Regular Customer</p>
                             </div>
@@ -310,7 +310,7 @@ export default function AboutUs() {
                             <h3 className="text-xl font-semibold mb-4">Press Mentions</h3>
                             <div className="mb-4">
                                 <p className="text-lg mb-2">
-                                    "Kape ni Rab is revolutionizing the local coffee scene with their commitment to quality and community."
+                                    &quot;Kape ni Rab is revolutionizing the local coffee scene with their commitment to quality and community.&quot;
                                 </p>
                                 <p className="text-right">- The Daily Brew Magazine</p>
                             </div>

@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Import the CartItem type from the menu-page file
 import { useContext, useState } from 'react';
 import ContextGlobal from '@/utils/context/_global';
+import Image from 'next/image';
 
 export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('credit_card');
@@ -107,7 +108,13 @@ export default function Checkout() {
                     }`}
                   onClick={() => setPaymentMethod('gcash')}
                 >
-                  <img src="/Gcash_logo.svg?height=20&width=20" alt="GCash" className="h-5 w-5" />
+                 <Image
+                    src="/Gcash_logo.svg" // Remove the query parameters
+                    alt="GCash"
+                    width={20}  // Set the width for the logo
+                    height={20} // Set the height for the logo
+                    className="h-5 w-5" // Optional additional styling
+                  />
                   <span>GCash</span>
                 </Button>
                 <Button
@@ -117,7 +124,13 @@ export default function Checkout() {
                     }`}
                   onClick={() => setPaymentMethod('maya')}
                 >
-                  <img src="/Maya_logo.svg?height=20&width=20" alt="Maya" className="h-5 w-5" />
+                  <Image
+                    src="/Maya_logo.svg"
+                    alt="Maya"
+                    width={20}  // Set the width to the intended value
+                    height={20} // Set the height to the intended value
+                    className="h-5 w-5" // You can still use className for styling
+                  />
                   <span>Maya</span>
                 </Button>
               </div>
