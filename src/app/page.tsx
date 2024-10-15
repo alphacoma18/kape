@@ -1,7 +1,8 @@
+import Menu from "@/app/menu/page";
+
+
 const Home = () => {
-  return (
-    <div>Home</div>
-  );
+  return <Menu />;
 }
 
 export default Home;
