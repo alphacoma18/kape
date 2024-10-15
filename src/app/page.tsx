@@ -1,7 +1,8 @@
-import AboutUs from "./about-us/page";
 
 const Home = () => {
-  return <AboutUs />;
+  return (
+    <h1>HelloWorld</h1>
+  );
 }
 
 export default Home;
