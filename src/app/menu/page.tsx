@@ -1,18 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingBag, X, Plus, Minus, Coffee, IceCream, Leaf, Croissant, Grid, Trash2, ChevronRight, ChevronLeft } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Coffee, Croissant, Grid, IceCream, Leaf, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import Slider from 'react-slick';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 type MenuItem = {
   id: number
@@ -57,12 +55,11 @@ const categoryIcons = {
   'Food': Croissant,
 }
 
-export default function Component() {
+export default function MenuPage() {
   const [cart, setCart] = useState<CartItem[]>([])
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [activeCategory, setActiveCategory] = useState('All Items')
   const [isMobile, setIsMobile] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const handleResize = () => {
@@ -276,7 +273,7 @@ export default function Component() {
   )
 }
 
-function CustomPrevArrow(props: any) {
+function CustomPrevArrow(props: React.HTMLProps<HTMLButtonElement>) {
   const { onClick } = props
   return (
     <Button
@@ -290,10 +287,10 @@ function CustomPrevArrow(props: any) {
   )
 }
 
-function CustomNextArrow(props: any) {
+function CustomNextArrow(props: React.HTMLProps<HTMLButtonElement>) {
   const { onClick } = props
   return (
-    
+
     <Button
       variant="outline"
       size="icon"

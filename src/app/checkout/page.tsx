@@ -176,7 +176,7 @@ export default function Checkout() {
             </Button>
           </div>
         </form>
-        <Link href="/">
+        <Link href="/menu">
           <Button variant="ghost" className="mt-4">
             Back to Menu
           </Button>
