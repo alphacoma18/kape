@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Cart from "@/components/cart";
 import { ContextProviderGlobal } from "@/utils/context/_global";
 import { Montserrat } from "next/font/google";
 const fonts = Montserrat({ subsets: ["latin"] });
@@ -16,14 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${fonts.className} antialiased`}
-      >
-        <ContextProviderGlobal>
-          <Navbar />
-          <Cart />
-          {children}
-        </ContextProviderGlobal>
+      <body className={`${fonts.className} antialiased`}>
+        <ContextProviderGlobal>{children}</ContextProviderGlobal>
       </body>
     </html>
   );
