@@ -4,6 +4,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Navbar from '@/components/navbar';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { Coffee, Github, Linkedin, Mail, Phone, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import PartnerShowcase from '@/components/showcase';
@@ -92,6 +93,8 @@ export default function AboutUs() {
 
     return (
         <div className="min-h-screen bg-[#F5E6D3] text-[#4A3728]">
+            <Navbar />
+            
             {/* Hero Section */}
             <section className="relative h-[70vh] overflow-hidden">
                 <Image
