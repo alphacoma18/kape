@@ -21,7 +21,7 @@ export default function Component() {
     window.location.href = "/menu";
   };
 
-  const handleSplineLoad = (spline) => {
+  const handleSplineLoad = (spline: any) => {
     setIsLoaded(true);
     splineRef.current = spline;
 
