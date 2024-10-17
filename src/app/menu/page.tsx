@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -261,7 +262,7 @@ export default function MenuPage() {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isCartOpen]);
+  }, [isCartOpen, setIsCartOpen]);
 
   const addToCart = (item: MenuItem) => {
     setCart((prevCart) => {
