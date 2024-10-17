@@ -21,6 +21,7 @@ export default function Component() {
     window.location.href = "/menu";
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSplineLoad = (spline: any) => {
     setIsLoaded(true);
     splineRef.current = spline;
