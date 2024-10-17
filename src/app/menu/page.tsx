@@ -11,7 +11,6 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronLeft,
-  ChevronRight,
   Coffee,
   Croissant,
   Grid,
@@ -28,6 +27,7 @@ import { MenuItem } from "@/utils/context/_global";
 import GlobalContext from "@/utils/context/_global";
 import { useContext } from "react";
 import Cart from "@/components/cart";
+import Image from "next/image";
 
 const menuItems: MenuItem[] = [
   { id: 1, name: "Caffe Latte", description: "Rich espresso with steamed milk", price: 3.95, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Caffe_Latte_at_Pulse_Cafe.jpg/1280px-Caffe_Latte_at_Pulse_Cafe.jpg", category: "Hot Coffees" },
@@ -114,11 +114,6 @@ export default function MenuPage() {
     toast.success(`Added ${item.name} to cart`);
   };
 
-  const getTotalPrice = () => {
-    return cart
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2);
-  };
 
   return (
     <div className="min-h-screen bg-[#F2F0EB] text-[#1E3932]">
@@ -223,11 +218,13 @@ export default function MenuPage() {
                 className="bg-white border-[#776B5D] border-opacity-20 flex flex-col"
               >
                 <CardHeader>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-48 object-cover rounded-t-lg"
-                  />
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-48 object-cover rounded-t-lg"
+                  width={500} // Specify the width
+                  height={192} // Specify the height
+                />
                 </CardHeader>
                 <CardContent className="flex-grow flex flex-col">
                   <CardTitle className="text-lg line-clamp-2">{item.name}</CardTitle>

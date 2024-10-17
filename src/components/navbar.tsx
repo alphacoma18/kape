@@ -1,14 +1,12 @@
 "use client";
 
-import ContextGlobal from '@/utils/context/_global';
 import { Menu } from 'lucide-react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import * as Dialog from '@radix-ui/react-dialog'; // Import Dialog components
 
 export default function Navbar() {
-  const { cart } = useContext(ContextGlobal);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
