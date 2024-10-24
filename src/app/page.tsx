@@ -18,7 +18,7 @@ export default function Component() {
 
   const handleSplineClick = () => {
     // Navigate to checkout page
-    window.location.href = "/menu.html";
+    window.location.href = "/kape/menu";
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

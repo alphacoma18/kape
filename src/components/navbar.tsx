@@ -28,7 +28,7 @@ export default function Navbar() {
                   Home
                 </Button>
               </Link>
-              <Link href="/menu" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/kape/menu" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="ghost" className="w-full justify-start">
                   Menu
                 </Button>
