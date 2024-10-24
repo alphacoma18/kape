@@ -18,7 +18,7 @@ export default function Component() {
 
   const handleSplineClick = () => {
     // Navigate to checkout page
-    window.location.href = "/kape/menu";  
+    window.location.href = "/menu";  
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -71,7 +71,7 @@ export default function Component() {
 
           {/* Menu Button */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/kape/menu" passHref>
+            <Link href="/menu" passHref>
               <Button className="bg-[#402e25] text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg mx-auto block text-center z">
                 Click Rab the Kape to check the menu
               </Button>
