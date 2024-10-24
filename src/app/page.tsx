@@ -18,11 +18,7 @@ export default function Component() {
 
   const handleSplineClick = () => {
     // Navigate to checkout page
-    return (
-      <Link href="/menu">
-        <a onClick={handleSplineClick}>Click to check the menu</a>
-      </Link>
-    );
+    window.location.href = "/menu";
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
