@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Spline from "@splinetool/react-spline";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";    
 import { motion } from "framer-motion";
 
 export default function Component() {
@@ -18,7 +18,11 @@ export default function Component() {
 
   const handleSplineClick = () => {
     // Navigate to checkout page
-    window.location.href = "/menu";
+    return (
+      <Link href="/menu">
+        <a onClick={handleSplineClick}>Click to check the menu</a>
+      </Link>
+    );
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
