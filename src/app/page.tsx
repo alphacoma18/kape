@@ -18,7 +18,8 @@ export default function Component() {
 
   const handleSplineClick = () => {
     // Navigate to checkout page
-    window.location.href = "/menu";  
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    window.location.href = `${basePath}/menu`;
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
