@@ -71,7 +71,7 @@ export default function Component() {
 
           {/* Menu Button */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/menu" passHref>
+            <Link href="/kape/menu" passHref>
               <Button className="bg-[#402e25] text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg mx-auto block text-center z">
                 Click Rab the Kape to check the menu
               </Button>
