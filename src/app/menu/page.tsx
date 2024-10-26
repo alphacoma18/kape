@@ -29,29 +29,33 @@ import { useContext } from "react";
 import Cart from "@/components/cart";
 import Image from "next/image";
 
-const exchangeRate = 56; // Example exchange rate from USD to PHP
+const exchangeRate = 58; // Example exchange rate from USD to PHP
+
+function convertCurrency(amount: number) {
+  return Math.round(amount * exchangeRate);
+}
 
 const menuItems: MenuItem[] = [
-  { id: 1, name: "Caffe Latte", description: "Rich espresso with steamed milk", price: (3.95 * exchangeRate).toFixed(2), image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Caffe_Latte_at_Pulse_Cafe.jpg/1280px-Caffe_Latte_at_Pulse_Cafe.jpg", category: "Hot Coffees" },
-  { id: 2, name: "Cappuccino", description: "Espresso with steamed milk foam", price: (3.95 * exchangeRate).toFixed(2), image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Cappuccino_at_Sightglass_Coffee.jpg/1920px-Cappuccino_at_Sightglass_Coffee.jpg", category: "Hot Coffees" },
-  { id: 3, name: "Caramel Macchiato", description: "Espresso with vanilla syrup and caramel", price: (4.45 * exchangeRate).toFixed(2), image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Macchiato_%287199366530%29.jpg/1280px-Macchiato_%287199366530%29.jpg", category: "Hot Coffees" },
-  { id: 4, name: "Iced Coffee", description: "Freshly brewed coffee served chilled", price: (2.95 * exchangeRate).toFixed(2), image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/1024px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg", category: "Cold Coffees" },
-  { id: 5, name: "Cold Brew", description: "Slow-steeped for smooth taste", price: (3.45 * exchangeRate).toFixed(2), image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nitro_Cold_Brew.jpg/800px-Nitro_Cold_Brew.jpg", category: "Cold Coffees" },
-  { id: 6, name: "Iced Caramel Macchiato", description: "Espresso, milk, vanilla, and caramel", price: (4.45 * exchangeRate).toFixed(2), image: "https://www.allrecipes.com/thmb/gMKrji54zxfPBd-wkIX0peoh24g=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/258686-IcedCaramelMacchiato-ddmps-4x3-104704-2effb74f7d504b8aa5fbd52204d0e2e5.jpg", category: "Cold Coffees" },
-  { id: 7, name: "Chai Tea Latte", description: "Black tea with spices and steamed milk", price: (3.95 * exchangeRate).toFixed(2), image: "https://fitfoodiefinds.com/wp-content/uploads/2021/09/Chai-Tea-Latte-05.jpg", category: "Tea" },
-  { id: 8, name: "Green Tea Latte", description: "Green tea blended with milk", price: (3.95 * exchangeRate).toFixed(2), image: "https://primulaproducts.com/cdn/shop/articles/jackieo_Youve_been_drinking_matcha_green_tea_latte_for_a_few_w_f5899c8d-f20b-4331-b1a8-d1eb1736d367_900x.png?v=1687789713", category: "Tea" },
-  { id: 9, name: "Chocolate Croissant", description: "Flaky croissant filled with rich chocolate", price: (2.75 * exchangeRate).toFixed(2), image: "https://ruokala.sg/cdn/shop/articles/ruokala-gourmet-chocolate-croissants.jpg?v=1707194100&width=1000", category: "Food" },
-  { id: 10, name: "Blueberry Muffin", description: "Moist muffin with blueberries", price: (2.45 * exchangeRate).toFixed(2), image: "https://cambreabakes.com/wp-content/uploads/2024/03/bakery-style-blueberry-muffins-featured-2.jpg", category: "Food" },
-  { id: 11, name: "Vanilla Bean Latte", description: "Espresso with steamed milk and vanilla flavor", price: (4.25 * exchangeRate).toFixed(2), image: "https://assets.surlatable.com/m/2ee217309ac4f8ba/72_dpi_webp-REC-506950_VanillaLatte.jpg", category: "Hot Coffees" },
-  { id: 12, name: "Matcha Latte", description: "Matcha green tea whisked with steamed milk", price: (4.5 * exchangeRate).toFixed(2), image: "https://cdn.loveandlemons.com/wp-content/uploads/2023/06/iced-matcha-latte.jpg", category: "Tea" },
-  { id: 13, name: "Espresso", description: "Strong and bold shot of espresso", price: (2.5 * exchangeRate).toFixed(2), image: "https://www.thespruceeats.com/thmb/HJrjMfXdLGHbgMhnM0fMkDx9XPQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/what-is-espresso-765702-hero-03_cropped-ffbc0c7cf45a46ff846843040c8f370c.jpg", category: "Hot Coffees" },
-  { id: 14, name: "Turmeric Latte", description: "A warming drink with turmeric, milk, and spices", price: (4.0 * exchangeRate).toFixed(2), image: "https://sweetpotatosoul.com/wp-content/uploads/2024/02/turmeric-latte-in-mug-819x1024.jpeg", category: "Tea" },
-  { id: 15, name: "Peach Iced Tea", description: "Refreshing iced tea infused with peach flavor", price: (2.95 * exchangeRate).toFixed(2), image: "https://delight-fuel.com/wp-content/uploads/2020/07/Peach_Ice_Tea_3-735x1103.jpg", category: "Cold Teas" },
-  { id: 16, name: "Banana Bread", description: "Moist banana bread with walnuts", price: (2.95 * exchangeRate).toFixed(2), image: "https://www.onceuponachef.com/images/2011/04/Best-Banana-Bread-1200x1370.jpg", category: "Food" },
-  { id: 17, name: "Almond Croissant", description: "Delicious almond-filled croissant", price: (3.25 * exchangeRate).toFixed(2), image: "https://olivesnthyme.com/wp-content/uploads/2024/04/Almond-Croissant-21.jpg", category: "Food" },
-  { id: 18, name: "Matcha Chai Latte", description: "A blend of matcha and chai spices with steamed milk", price: (4.75 * exchangeRate).toFixed(2), image: "https://cookhousediary.com/wp-content/uploads/2023/04/matcha-chai-latte-cover.jpeg", category: "Tea" },
-  { id: 19, name: "Pumpkin Spice Latte", description: "Seasonal favorite with pumpkin and spices", price: (4.5 * exchangeRate).toFixed(2), image: "https://www.ambitiouskitchen.com/wp-content/uploads/2021/09/Pumpkin-Spice-Latte-4.jpg", category: "Hot Coffees" },
-  { id: 20, name: "Lemon Tart", description: "Tangy lemon tart with a buttery crust", price: (3.5 * exchangeRate).toFixed(2), image: "https://www.elmundoeats.com/wp-content/uploads/2022/03/RC-Healthy-lemon-tarts-on-a-rack-view-from-front-2.jpg", category: "Food" },
+  { id: 1, name: "Caffe Latte", description: "Rich espresso with steamed milk", price: 3.95, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Caffe_Latte_at_Pulse_Cafe.jpg/1280px-Caffe_Latte_at_Pulse_Cafe.jpg", category: "Hot Coffees" },
+  { id: 2, name: "Cappuccino", description: "Espresso with steamed milk foam", price: 3.95, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Cappuccino_at_Sightglass_Coffee.jpg/1920px-Cappuccino_at_Sightglass_Coffee.jpg", category: "Hot Coffees" },
+  { id: 3, name: "Caramel Macchiato", description: "Espresso with vanilla syrup and caramel", price: 4.45, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Macchiato_%287199366530%29.jpg/1280px-Macchiato_%287199366530%29.jpg", category: "Hot Coffees" },
+  { id: 4, name: "Iced Coffee", description: "Freshly brewed coffee served chilled", price: 2.95, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg/1024px-Blue_Bottle%2C_Kyoto_Style_Ice_Coffee_%285909775445%29.jpg", category: "Cold Coffees" },
+  { id: 5, name: "Cold Brew", description: "Slow-steeped for smooth taste", price: 3.45, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Nitro_Cold_Brew.jpg/800px-Nitro_Cold_Brew.jpg", category: "Cold Coffees" },
+  { id: 6, name: "Iced Caramel Macchiato", description: "Espresso, milk, vanilla, and caramel", price: 4.45, image: "https://www.allrecipes.com/thmb/gMKrji54zxfPBd-wkIX0peoh24g=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/258686-IcedCaramelMacchiato-ddmps-4x3-104704-2effb74f7d504b8aa5fbd52204d0e2e5.jpg", category: "Cold Coffees" },
+  { id: 7, name: "Chai Tea Latte", description: "Black tea with spices and steamed milk", price: 3.95, image: "https://fitfoodiefinds.com/wp-content/uploads/2021/09/Chai-Tea-Latte-05.jpg", category: "Tea" },
+  { id: 8, name: "Green Tea Latte", description: "Green tea blended with milk", price: 3.95, image: "https://primulaproducts.com/cdn/shop/articles/jackieo_Youve_been_drinking_matcha_green_tea_latte_for_a_few_w_f5899c8d-f20b-4331-b1a8-d1eb1736d367_900x.png?v=1687789713", category: "Tea" },
+  { id: 9, name: "Chocolate Croissant", description: "Flaky croissant filled with rich chocolate", price: 2.75, image: "https://ruokala.sg/cdn/shop/articles/ruokala-gourmet-chocolate-croissants.jpg?v=1707194100&width=1000", category: "Food" },
+  { id: 10, name: "Blueberry Muffin", description: "Moist muffin with blueberries", price: 2.45, image: "https://cambreabakes.com/wp-content/uploads/2024/03/bakery-style-blueberry-muffins-featured-2.jpg", category: "Food" },
+  { id: 11, name: "Vanilla Bean Latte", description: "Espresso with steamed milk and vanilla flavor", price: 4.25, image: "https://assets.surlatable.com/m/2ee217309ac4f8ba/72_dpi_webp-REC-506950_VanillaLatte.jpg", category: "Hot Coffees" },
+  { id: 12, name: "Matcha Latte", description: "Matcha green tea whisked with steamed milk", price: 4.5, image: "https://cdn.loveandlemons.com/wp-content/uploads/2023/06/iced-matcha-latte.jpg", category: "Tea" },
+  { id: 13, name: "Espresso", description: "Strong and bold shot of espresso", price: 2.5, image: "https://www.thespruceeats.com/thmb/HJrjMfXdLGHbgMhnM0fMkDx9XPQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/what-is-espresso-765702-hero-03_cropped-ffbc0c7cf45a46ff846843040c8f370c.jpg", category: "Hot Coffees" },
+  { id: 14, name: "Turmeric Latte", description: "A warming drink with turmeric, milk, and spices", price: 4.0, image: "https://sweetpotatosoul.com/wp-content/uploads/2024/02/turmeric-latte-in-mug-819x1024.jpeg", category: "Tea" },
+  { id: 15, name: "Peach Iced Tea", description: "Refreshing iced tea infused with peach flavor", price: 2.95, image: "https://delight-fuel.com/wp-content/uploads/2020/07/Peach_Ice_Tea_3-735x1103.jpg", category: "Cold Teas" },
+  { id: 16, name: "Banana Bread", description: "Moist banana bread with walnuts", price: 2.95, image: "https://www.onceuponachef.com/images/2011/04/Best-Banana-Bread-1200x1370.jpg", category: "Food" },
+  { id: 17, name: "Almond Croissant", description: "Delicious almond-filled croissant", price: 3.25, image: "https://olivesnthyme.com/wp-content/uploads/2024/04/Almond-Croissant-21.jpg", category: "Food" },
+  { id: 18, name: "Matcha Chai Latte", description: "A blend of matcha and chai spices with steamed milk", price: 4.75, image: "https://cookhousediary.com/wp-content/uploads/2023/04/matcha-chai-latte-cover.jpeg", category: "Tea" },
+  { id: 19, name: "Pumpkin Spice Latte", description: "Seasonal favorite with pumpkin and spices", price: 4.5, image: "https://www.ambitiouskitchen.com/wp-content/uploads/2021/09/Pumpkin-Spice-Latte-4.jpg", category: "Hot Coffees" },
+  { id: 20, name: "Lemon Tart", description: "Tangy lemon tart with a buttery crust", price: 3.5, image: "https://www.elmundoeats.com/wp-content/uploads/2022/03/RC-Healthy-lemon-tarts-on-a-rack-view-from-front-2.jpg", category: "Food" },
 ];
 
 const categoryIcons = {
@@ -234,7 +238,7 @@ export default function MenuPage() {
                     {item.description}
                   </p>
                   <div className="flex justify-between items-center mt-2">
-                    <p className="font-bold">${item.price.toFixed(2)}</p>
+                    <p className="font-bold">₱{convertCurrency(item.price)}</p>
                     {categoryIcons[item.category as keyof typeof categoryIcons] && (
                       <span className="text-gray-500">
                         {React.createElement(
@@ -270,8 +274,8 @@ export default function MenuPage() {
           </span>
         )}
       </Button>
-      
-      
+
+
 
       <Cart />
 
