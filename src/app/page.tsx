@@ -4,7 +4,6 @@ import { iconURL } from "@/components/about-page";
 import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function Component() {
@@ -19,7 +18,7 @@ export default function Component() {
   }, []);
 
   const handleSplineClick = () => {
-    // Navigate to checkout page
+    // Navigate to about-us page
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
     window.location.href = `${basePath}/about-us`;
   };
@@ -69,7 +68,7 @@ export default function Component() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           {/* Title */}
-          <Link href="/about-us">
+          <div onClick={handleSplineClick}>
             <Image
               src={iconURL}
               width={150}
@@ -77,7 +76,7 @@ export default function Component() {
               alt="Kape ni Rab Logo"
               className="rounded-full sm:hidden mx-auto border-4 border-[#402e25] hover:border-[#8b6244] transition-colors mb-4 hover:shadow-2xl cursor-pointer"
             />
-          </Link>
+          </div>
           <h1
             className="text-[#402e25] text-8xl sm:text-9xl font-extrabold leading-none tracking-tighter mb-2 text-center pointer-events-auto"
             style={{
