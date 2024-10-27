@@ -10,6 +10,8 @@ import { Award, Coffee, Facebook, Heart, Instagram, Leaf, Menu, Star, Twitter, U
 import Image from 'next/image';
 import Link from "next/link";
 import { useState } from 'react';
+
+const baseURL = "https://raw.githubusercontent.com/alphacoma18/kape/master/public";
 const commitments = [
   {
     title: "Sustainability",
@@ -167,7 +169,8 @@ export function AboutPageComponent() {
 
       {/* Hero Section */}
       <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] bg-cover bg-center flex items-center justify-center overflow-hidden">
-        <Image src="/shop.jpg" alt="Kape ni Rab" layout="fill" objectFit="cover" />
+        <Image src={baseURL + "/shop.jpg"}
+          alt="Kape ni Rab" layout="fill" objectFit="cover" />
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-tight">Crafting Moments,<br />One Cup at a Time</h1>
@@ -193,7 +196,7 @@ export function AboutPageComponent() {
             </div>
             <div className="relative mt-6 md:mt-0">
               <Image
-                src="/service.jpg"
+                src={baseURL + "/service.jpg"}
                 alt="Kape ni Rab heritage"
                 width={600}
                 height={400}
@@ -232,7 +235,7 @@ export function AboutPageComponent() {
                 <Card>
                   <CardContent className="flex flex-col md:flex-row items-center p-4 sm:p-6">
                     <Image
-                      src={tab.imageSrc}
+                      src={baseURL + tab.imageSrc}
                       alt={tab.imageAlt}
                       width={300}
                       height={300}
@@ -282,7 +285,7 @@ export function AboutPageComponent() {
                       </DialogHeader>
                       <div className="grid gap-4">
                         <Image
-                          src={commitment.image}
+                          src={baseURL + commitment.image}
                           alt={commitment.title}
                           width={400}
                           height={200}
@@ -308,7 +311,7 @@ export function AboutPageComponent() {
               <div key={index} className="flex flex-col items-center text-center">
                 <div className="relative mb-4 sm:mb-6">
                   <Image
-                    src={founder.image}
+                    src={baseURL + founder.image}
                     alt={founder.name}
                     width={200}
                     height={200}
@@ -353,7 +356,7 @@ export function AboutPageComponent() {
             </div>
             <div className="relative mt-6 md:mt-0">
               <Image
-                src="/community-impact.jpg"
+                src={baseURL + "/community-impact.jpg"}
                 alt="Community Impact"
                 width={600}
                 height={400}

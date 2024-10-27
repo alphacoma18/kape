@@ -1,10 +1,10 @@
 "use client";
-import { AnimatePresence, motion } from 'framer-motion';
 import ContextGlobal from '@/utils/context/_global';
-import { useContext } from 'react';
-import { Button } from './ui/button';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus, Trash2, X } from 'lucide-react';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { Button } from './ui/button';
 const Cart = () => {
     const { cart, isCartOpen, setIsCartOpen, updateCartItemQuantity, clearCart } = useContext(ContextGlobal);
     const getTotalPrice = () => cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
