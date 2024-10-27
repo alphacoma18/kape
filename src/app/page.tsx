@@ -80,10 +80,10 @@ export default function Component() {
           </h1>
 
           {/* Menu Button */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <p className="bg-[#402e25] text-center font-bold text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg">
+          <motion.div className="flex justify-center" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link href={"/menu"} className="text-balance bg-[#402e25] text-center font-bold text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg">
                 Click Rab the Kape to check the menu
-            </p>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
