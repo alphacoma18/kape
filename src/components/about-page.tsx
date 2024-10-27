@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useState } from 'react';
 
 const baseURL = "https://raw.githubusercontent.com/alphacoma18/kape/master/public";
+const iconURL = "https://raw.githubusercontent.com/alphacoma18/kape/master/src/app/web-app-manifest-512x512.png";
 const commitments = [
   {
     title: "Sustainability",
@@ -133,7 +134,9 @@ export function AboutPageComponent() {
       <nav className="bg-[#2C1810] text-white py-4 px-4 sm:px-6 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <Image src="/placeholder-logo.svg" alt="Kape ni Rab Logo" width={40} height={40} className="rounded-full w-8 h-8 sm:w-10 sm:h-10" />
+            <Image src={iconURL}
+
+              alt="Kape ni Rab Logo" width={40} height={40} className="rounded-full w-8 h-8 sm:w-10 sm:h-10" />
             <span className="text-lg sm:text-2xl font-bold">Kape ni Rab</span>
           </div>
           <div className="hidden md:flex space-x-4 lg:space-x-6">
@@ -432,7 +435,8 @@ export function AboutPageComponent() {
       <footer className="bg-[#2C1810] text-white py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <Image src="/placeholder-logo.svg" alt="Kape ni Rab Logo" width={80} height={80} className="mb-4 w-16 h-16 sm:w-20 sm:h-20" />
+            <Image src={iconURL}
+              alt="Kape ni Rab Logo" width={80} height={80} className="mb-4 w-16 h-16 sm:w-20 sm:h-20" />
             <p className="text-xs sm:text-sm">Crafting moments and memories, one cup at a time since 2022.</p>
           </div>
           <div>
