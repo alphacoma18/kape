@@ -69,7 +69,7 @@ export default function Component() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           {/* Title */}
-          <Link href="/menu">
+          <Link href="/about-us">
             <Image
               src={iconURL}
               width={150}
