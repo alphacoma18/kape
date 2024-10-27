@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useState } from 'react';
 
 const baseURL = "https://raw.githubusercontent.com/alphacoma18/kape/master/public";
-const iconURL = "https://raw.githubusercontent.com/alphacoma18/kape/master/src/app/web-app-manifest-512x512.png";
+export const iconURL = "https://raw.githubusercontent.com/alphacoma18/kape/master/src/app/web-app-manifest-512x512.png";
 const commitments = [
   {
     title: "Sustainability",

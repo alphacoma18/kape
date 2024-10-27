@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { iconURL } from "@/components/about-page";
 import Spline from "@splinetool/react-spline";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";    
 import { motion } from "framer-motion";
-
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 export default function Component() {
   const [isLoaded, setIsLoaded] = useState(false);
   const splineRef = useRef(null);
@@ -38,7 +38,7 @@ export default function Component() {
     <main className="relative min-h-screen overflow-hidden bg-[#ffe1b6]">
       {/* Spline 3D Object - Clickable */}
       <div
-        className="absolute inset-0 z-10 cursor-pointer"
+        className="hidden sm:block sm:absolute inset-0 z-10 cursor-pointer"
         style={{ transform: "translateY(-20px)" }}
         onClick={handleSplineClick}
       >
@@ -50,7 +50,7 @@ export default function Component() {
 
       {/* Content on top of Spline */}
       <div
-        className="relative z-20 flex flex-col items-center justify-end min-h-screen px-4 pb-32 pointer-events-none"
+        className="relative z-20 flex flex-col items-center justify-center sm:justify-end min-h-screen px-4 sm:pb-32 sm:pointer-events-none"
         style={{ transform: "translateY(-20px)" }}
       >
         <motion.div
@@ -59,8 +59,17 @@ export default function Component() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           {/* Title */}
+          <Link href="/menu">
+            <Image
+              src={iconURL}
+              width={150}
+              height={150}
+              alt="Kape ni Rab Logo"
+              className="rounded-full sm:hidden mx-auto border-4 border-[#402e25] hover:border-[#8b6244] transition-colors mb-4 hover:shadow-2xl cursor-pointer"
+            />
+          </Link>
           <h1
-            className="text-[#402e25] text-[150px] font-extrabold leading-none tracking-tighter mb-2 text-center"
+            className="text-[#402e25] text-8xl sm:text-9xl font-extrabold leading-none tracking-tighter mb-2 text-center pointer-events-auto"
             style={{
               textShadow:
                 "4px 4px 8px rgba(0,0,0,0.1), inset 2px 2px 4px rgba(0,0,0,0.2)",
@@ -72,11 +81,9 @@ export default function Component() {
 
           {/* Menu Button */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/menu" passHref>
-              <Button className="bg-[#402e25] text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg mx-auto block text-center z">
+            <p className="bg-[#402e25] text-center font-bold text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg">
                 Click Rab the Kape to check the menu
-              </Button>
-            </Link>
+            </p>
           </motion.div>
         </motion.div>
       </div>
