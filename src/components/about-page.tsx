@@ -96,10 +96,10 @@ export function AboutPageComponent() {
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
             <div>
               <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-4 sm:mb-6 leading-relaxed">
-                Since our humble beginnings in 2022, Kape ni Rab has been more than just a coffee shop - it's been a journey of passion, quality, and community. Our story began in a small corner of Manila, where our founder, Rab Santos, first dreamed of creating a space where coffee could bring people together.
+                Since our humble beginnings in 2022, Kape ni Rab has been more than just a coffee shop - it&apos;s been a journey of passion, quality, and community. Our story began in a small corner of Manila, where our founder, Rab Santos, first dreamed of creating a space where coffee could bring people together.
               </p>
               <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-4 sm:mb-6 leading-relaxed">
-                Over the years, we've grown from that single location to become a beloved presence across the Philippines, never forgetting our roots or compromising on our commitment to excellence.
+                Over the years, we&apos;ve grown from that single location to become a beloved presence across the Philippines, never forgetting our roots or compromising on our commitment to excellence.
               </p>
             </div>
             <div className="relative mt-6 md:mt-0">
@@ -280,7 +280,7 @@ export function AboutPageComponent() {
             <div>
               <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-[#2C1810]">Brewing Positive Change</h3>
               <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6">
-                At Kape ni Rab, we believe in the power of coffee to create positive change. Through our various initiatives, we're committed to supporting local communities, promoting sustainable practices, and fostering a culture of inclusivity.
+                At Kape ni Rab, we believe in the power of coffee to create positive change. Through our various initiatives, we&apos;re committed to supporting local communities, promoting sustainable practices, and fostering a culture of inclusivity.
               </p>
               <ul className="space-y-2 sm:space-y-4">
                 {[
