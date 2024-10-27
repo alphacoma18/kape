@@ -6,8 +6,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+
 export default function Component() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isButtonInteracted, setIsButtonInteracted] = useState(false);
   const splineRef = useRef(null);
   const coffeeObjectRef = useRef(null);
 
@@ -19,7 +21,7 @@ export default function Component() {
   const handleSplineClick = () => {
     // Navigate to checkout page
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-    window.location.href = `${basePath}/menu`;
+    window.location.href = `${basePath}/about-us`;
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,6 +34,14 @@ export default function Component() {
     if (coffeeObject) {
       coffeeObjectRef.current = coffeeObject;
     }
+  };
+
+  const handleButtonInteraction = () => {
+    setIsButtonInteracted(true);
+  };
+
+  const handleButtonBlur = () => {
+    setIsButtonInteracted(false);
   };
 
   return (
@@ -80,10 +90,24 @@ export default function Component() {
           </h1>
 
           {/* Menu Button */}
-          <motion.div className="flex justify-center" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href={"/menu"} className="text-balance bg-[#402e25] text-center font-bold text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg">
-                Click Rab the Kape to check the menu
-            </Link>
+          <motion.div 
+            whileHover={{ scale: 1.05 }} 
+            whileTap={{ scale: 0.95 }}
+            onMouseEnter={handleButtonInteraction}
+            onMouseLeave={handleButtonBlur}
+            onTouchStart={handleButtonInteraction}
+            onTouchEnd={handleButtonBlur}
+            onClick={handleButtonInteraction}
+            onBlur={handleButtonBlur}
+          >
+            <p className="bg-[#402e25] text-center font-bold text-white hover:bg-[#8b6244] transition-colors text-lg py-2 px-8 rounded-full shadow-lg relative overflow-hidden">
+              <span className={`transition-opacity duration-300 ${isButtonInteracted ? 'opacity-0' : 'opacity-100'}`}>
+                Click Rab the Kape to Enter
+              </span>
+              <span className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isButtonInteracted ? 'opacity-100' : 'opacity-0'}`}>
+                No Not me, Click the Image
+              </span>
+            </p>
           </motion.div>
         </motion.div>
       </div>
