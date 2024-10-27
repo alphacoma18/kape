@@ -40,6 +40,87 @@ const commitments = [
     image: "/inclusivity.jpg"
   }
 ];
+
+const navLinks = [
+  { title: "Home", url: "/" },
+  { title: "Menu", url: "/menu" },
+  { title: "About", url: "/about-us" },
+];
+const founders = [
+  { name: "Rab Karl Colasino", role: "Visionary & Master Roaster", image: "/rab.png", quote: "Coffee is more than a drink; it's a connection to our roots and a bridge to our future." },
+  { name: "Bently Rafa", role: "Chief Coffee Officer", image: "/bently.jpg", quote: "Every cup tells a story. Our mission is to make each story unforgettable." },
+  { name: "Alpha Romer Coma", role: "Community Engagement Director", image: "/alpha.jpg", quote: "We don't just serve communities; we grow with them, one sip at a time." },
+];
+
+const communityImpact = [
+  { title: "Youth Barista Program", description: "Training and employment opportunities for underprivileged youth" },
+  { title: "Farmers' Support Network", description: "Direct partnerships with coffee farmers to ensure fair wages and sustainable practices" },
+  { title: "Local Art Showcase", description: "Featuring local artists' work in our shops and on our packaging" },
+];
+
+const testimonials = [
+  { quote: "Kape ni Rab isn't just a coffee shop, it's a sanctuary for coffee lovers. The attention to detail in every cup is simply remarkable.", author: "Aro Joash P., Food Critic", rating: 5 },
+  { quote: "As a regular, I can confidently say that Kape ni Rab serves the best coffee in town. The ambiance and community feel keep me coming back.", author: "John Kenneth A., Loyal Customer", rating: 5 },
+  { quote: "The commitment to sustainability and community support sets Kape ni Rab apart. It's more than just great coffee; it's a movement.", author: "Marc O., Environmental Activist", rating: 5 },
+  { quote: "Kape ni Rab has become my go-to spot for meetings and catch-ups. The quality of the coffee and service is unmatched.", author: "Kristoffer Ian S., Business Owner", rating: 5 },
+];
+
+const tabsData = [
+  {
+    id: 'beans',
+    title: 'Our Beans',
+    heading: 'Ethically Sourced Beans',
+    description: 'Our beans are carefully selected from sustainable farms across the globe, ensuring the highest quality and ethical practices.',
+    imageSrc: '/beans.jpg',
+    imageAlt: 'Coffee Beans',
+    features: [
+      'Single-origin selections',
+      'Fair trade certified',
+      'Organic options available'
+    ]
+  },
+  {
+    id: 'roasting',
+    title: 'Roasting Process',
+    heading: 'Artisanal Roasting',
+    description: 'Our master roasters bring out the unique flavors of each bean through carefully crafted roasting profiles.',
+    imageSrc: '/process.jpg',
+    imageAlt: 'Roasting Process',
+    features: [
+      'Small-batch roasting',
+      'Customized roast levels',
+      'Peak flavor preservation'
+    ]
+  },
+  {
+    id: 'brewing',
+    title: 'Brewing Methods',
+    heading: 'Precision Brewing',
+    description: 'We offer a variety of brewing methods to bring out the best in every cup, tailored to your preferences.',
+    imageSrc: '/brew.jpg',
+    imageAlt: 'Brewing Methods',
+    features: [
+      'Pour-over',
+      'Espresso',
+      'Cold brew',
+      'French press'
+    ]
+  },
+  {
+    id: 'pairings',
+    title: 'Perfect Pairings',
+    heading: 'Culinary Harmony',
+    description: 'Enhance your coffee experience with our expertly curated food pairings, designed to complement and elevate the flavors in your cup.',
+    imageSrc: '/pairings.jpg',
+    imageAlt: 'Coffee Pairings',
+    features: [
+      'Artisanal pastries',
+      'Gourmet sandwiches',
+      'Locally-sourced treats'
+    ]
+  }
+];
+
 export function AboutPageComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -54,9 +135,13 @@ export function AboutPageComponent() {
             <span className="text-lg sm:text-2xl font-bold">Kape ni Rab</span>
           </div>
           <div className="hidden md:flex space-x-4 lg:space-x-6">
-            <a href="/" className="hover:text-[#D4A574] transition-colors text-sm lg:text-base">Home</a>
-            <a href="/menu" className="hover:text-[#D4A574] transition-colors text-sm lg:text-base">Menu</a>
-            <a href="/about-us" className="hover:text-[#D4A574] transition-colors text-sm lg:text-base">About</a>
+            {
+              navLinks.map((link, index) => (
+                <Link key={index} href={link.url} className="hover:text-[#D4A574] transition-colors text-sm lg:text-base">
+                  {link.title}
+                </Link>
+              ))
+            }
           </div>
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Button className="bg-[#D4A574] hover:bg-[#B78D5F] text-[#2C1810] text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
@@ -69,9 +154,13 @@ export function AboutPageComponent() {
         </div>
         {isMenuOpen && (
           <div className="mt-4 md:hidden">
-            <a href="/" className="block py-2 hover:text-[#D4A574] transition-colors">Home</a>
-            <a href="/menu" className="block py-2 hover:text-[#D4A574] transition-colors">Menu</a>
-            <a href="/about-us" className="block py-2 hover:text-[#D4A574] transition-colors">About</a>
+            {
+              navLinks.map((link, index) => (
+                <Link key={index} href={link.url} className="block py-2 hover:text-[#D4A574] transition-colors text-sm">
+                  {link.title}
+                </Link>
+              ))
+            }
           </div>
         )}
       </nav>
@@ -122,80 +211,50 @@ export function AboutPageComponent() {
       {/* Coffee Experience Tabs */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#F3E5D8]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 md:mb-12 text-center text-[#2C1810]">The Kape ni Rab Experience</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 md:mb-12 text-center text-[#2C1810]">
+            The Kape ni Rab Experience
+          </h2>
           <Tabs defaultValue="beans" className="w-full">
-            <TabsList className="'flex items-stretch w-full justify-around flex-wrap h-auto space-y-1 mb-6 sm:mb-8 bg-[#2C1810] rounded-lg p-1">
-              {/* <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-6 sm:mb-8 bg-[#2C1810] rounded-lg p-1"> */}
-              <TabsTrigger value="beans" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-[#D4A574] data-[state=active]:text-[#2C1810]">Our Beans</TabsTrigger>
-              <TabsTrigger value="roasting" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-[#D4A574] data-[state=active]:text-[#2C1810]">Roasting Process</TabsTrigger>
-              <TabsTrigger value="brewing" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-[#D4A574] data-[state=active]:text-[#2C1810]">Brewing Methods</TabsTrigger>
-              <TabsTrigger value="pairings" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-[#D4A574] data-[state=active]:text-[#2C1810]">Perfect Pairings</TabsTrigger>
+            <TabsList className="flex items-stretch w-full justify-around flex-wrap h-auto space-y-1 mb-6 sm:mb-8 bg-[#2C1810] rounded-lg p-1">
+              {tabsData.map((tab) => (
+                <TabsTrigger
+                  key={tab.id}
+                  value={tab.id}
+                  className="text-xs sm:text-sm md:text-base data-[state=active]:bg-[#D4A574] data-[state=active]:text-[#2C1810]"
+                >
+                  {tab.title}
+                </TabsTrigger>
+              ))}
             </TabsList>
-            <TabsContent value="beans">
-              <Card>
-                <CardContent className="flex flex-col md:flex-row items-center p-4 sm:p-6">
-                  <Image src="/beans.jpg" alt="Coffee Beans" width={300} height={300} className="rounded-lg mb-4 md:mb-0 md:mr-6 mx-auto w-full  md:max-w-[300px] h-auto" />
-                  <div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 text-[#2C1810]">Ethically Sourced Beans</h3>
-                    <p className="text-sm sm:text-base text-gray-700 mb-2 sm:mb-4">Our beans are carefully selected from sustainable farms across the globe, ensuring the highest quality and ethical practices.</p>
-                    <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                      <li>Single-origin selections</li>
-                      <li>Fair trade certified</li>
-                      <li>Organic options available</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="roasting">
-              <Card>
-                <CardContent className="flex flex-col md:flex-row items-center p-4 sm:p-6">
-                  <Image src="/process.jpg" alt="Roasting Process" width={300} height={300} className="rounded-lg mb-4 md:mb-0 md:mr-6 mx-auto w-full md:max-w-[300px] h-auto" />
-                  <div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 text-[#2C1810]">Artisanal Roasting</h3>
-                    <p className="text-sm sm:text-base text-gray-700 mb-2 sm:mb-4">Our master roasters bring out the unique flavors of each bean through carefully crafted roasting profiles.</p>
-                    <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                      <li>Small-batch roasting</li>
-                      <li>Customized roast levels</li>
-                      <li>Peak flavor preservation</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="brewing">
-              <Card>
-                <CardContent className="flex flex-col md:flex-row items-center p-4 sm:p-6">
-                  <Image src="/brew.jpg" alt="Brewing Methods" width={300} height={300} className="rounded-lg mb-4 md:mb-0 md:mr-6 mx-auto w-full md:max-w-[300px] h-auto" />
-                  <div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 text-[#2C1810]">Precision Brewing</h3>
-                    <p className="text-sm sm:text-base text-gray-700 mb-2 sm:mb-4">We offer a variety of brewing methods to bring out the best in every cup, tailored to your preferences.</p>
-                    <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                      <li>Pour-over</li>
-                      <li>Espresso</li>
-                      <li>Cold brew</li>
-                      <li>French press</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="pairings">
-              <Card>
-                <CardContent className="flex flex-col md:flex-row items-center p-4 sm:p-6">
-                  <Image src="/pairings.jpg" alt="Coffee Pairings" width={300} height={300} className="rounded-lg mb-4 md:mb-0 md:mr-6 mx-auto w-full  md:max-w-[300px] h-auto" />
-                  <div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 text-[#2C1810]">Culinary Harmony</h3>
-                    <p className="text-sm sm:text-base text-gray-700 mb-2 sm:mb-4">Enhance your coffee experipexels-wildlittlethingsphoto-933964ence with our expertly curated food pairings, designed to complement and elevate the flavors in your cup.</p>
-                    <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
-                      <li>Artisanal pastries</li>
-                      <li>Gourmet sandwiches</li>
-                      <li>Locally-sourced treats</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
+
+            {tabsData.map((tab) => (
+              <TabsContent key={tab.id} value={tab.id}>
+                <Card>
+                  <CardContent className="flex flex-col md:flex-row items-center p-4 sm:p-6">
+                    <Image
+                      src={tab.imageSrc}
+                      alt={tab.imageAlt}
+                      width={300}
+                      height={300}
+                      className="rounded-lg mb-4 md:mb-0 md:mr-6 mx-auto w-full md:max-w-[300px] h-auto"
+                    />
+                    <div>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 text-[#2C1810]">
+                        {tab.heading}
+                      </h3>
+                      <p className="text-sm sm:text-base text-gray-700 mb-2 sm:mb-4">
+                        {tab.description}
+                      </p>
+                      <ul className="list-disc list-inside text-sm sm:text-base text-gray-700">
+                        {tab.features.map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
       </section>
@@ -245,11 +304,7 @@ export function AboutPageComponent() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 md:mb-12 text-center">Meet the Founders</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
-            {[
-              { name: "Rab Karl Colasino", role: "Visionary & Master Roaster", image: "/rab.png", quote: "Coffee is more than a drink; it's a connection to our roots and a bridge to our future." },
-              { name: "Bently Rafa", role: "Chief Coffee Officer", image: "/bently.jpg", quote: "Every cup tells a story. Our mission is to make each story unforgettable." },
-              { name: "Alpha Romer Coma", role: "Community Engagement Director", image: "/alpha.jpg", quote: "We don't just serve communities; we grow with them, one sip at a time." },
-            ].map((founder, index) => (
+            {founders.map((founder, index) => (
               <div key={index} className="flex flex-col items-center text-center">
                 <div className="relative mb-4 sm:mb-6">
                   <Image
@@ -283,11 +338,7 @@ export function AboutPageComponent() {
                 At Kape ni Rab, we believe in the power of coffee to create positive change. Through our various initiatives, we&apos;re committed to supporting local communities, promoting sustainable practices, and fostering a culture of inclusivity.
               </p>
               <ul className="space-y-2 sm:space-y-4">
-                {[
-                  { title: "Youth Barista Program", description: "Training and employment opportunities for underprivileged youth" },
-                  { title: "Farmers' Support Network", description: "Direct partnerships with coffee farmers to ensure fair wages and sustainable practices" },
-                  { title: "Local Art Showcase", description: "Featuring local artists' work in our shops and on our packaging" },
-                ].map((initiative, index) => (
+                {communityImpact.map((initiative, index) => (
                   <li key={index} className="flex items-start">
                     <div className="bg-[#D4A574] p-1 sm:p-2 rounded-full mr-2 sm:mr-4 mt-1">
                       <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-[#2C1810]" />
@@ -322,12 +373,7 @@ export function AboutPageComponent() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 md:mb-12 text-center text-[#2C1810]">What People Are Saying</h2>
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-            {[
-              { quote: "Kape ni Rab isn't just a coffee shop, it's a sanctuary for coffee lovers. The attention to detail in every cup is simply remarkable.", author: "Aro Joash P., Food Critic", rating: 5 },
-              { quote: "As a regular, I can confidently say that Kape ni Rab serves the best coffee in town. The ambiance and community feel keep me coming back.", author: "John Kenneth A., Loyal Customer", rating: 5 },
-              { quote: "The commitment to sustainability and community support sets Kape ni Rab apart. It's more than just great coffee; it's a movement.", author: "Marc O., Environmental Activist", rating: 5 },
-              { quote: "Kape ni Rab has become my go-to spot for meetings and catch-ups. The quality of the coffee and service is unmatched.", author: "Kristoffer Ian S., Business Owner", rating: 5 },
-            ].map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
               <Card key={index} className="overflow-hidden transition-all duration-300 hover:shadow-xl">
                 <CardContent className="p-4 sm:p-6 flex flex-col h-full">
                   <div className="flex mb-2 sm:mb-4">
@@ -389,9 +435,15 @@ export function AboutPageComponent() {
           <div>
             <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-4">Quick Links</h3>
             <ul className="space-y-1 sm:space-y-2">
-              <li><a href="#" className="text-xs sm:text-sm hover:text-[#D4A574] transition-colors">Our Story</a></li>
-              <li><a href="#" className="text-xs sm:text-sm hover:text-[#D4A574] transition-colors">Menu</a></li>
-              <li><a href="#" className="text-xs sm:text-sm hover:text-[#D4A574] transition-colors">Careers</a></li>
+              {
+                navLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link href={link.url} className="text-xs sm:text-sm hover:text-[#D4A574] transition-colors">
+                      {link.title}
+                    </Link>
+                  </li>
+                ))
+              }
             </ul>
           </div>
           <div>
